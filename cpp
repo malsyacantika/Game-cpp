@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {
-    srand(time(0));//to make the program randomize
+    srand(time(0));
     char mv;
     char repeat='y';
     int highscore=0;
@@ -14,14 +14,14 @@ int main()
     int score=0;
     bool wasit=true;
     int x=9;
-    int rintangan[3]; // the y-asis of obstacle
-    int rintang[3]; // the x-asis of obstacle
-    rintang[0]=10;
-    rintang[1]=18;
-    rintang[2]=27; // the starting x-asis of obstacle
+    int obstacle[3]; 
+    int block[3]; 
+    obstacle[0]=10;
+    obstacle[1]=18;
+    obstacle[2]=27; 
     for (int i=0;i<3;i++)
     {
-        rintangan[i]=(rand()-1)%12+2;
+        obstacle[i]=(rand()-1)%12+2;
     }
     string map[20][30];
     for (int i=0;i<20;i++)
@@ -40,33 +40,33 @@ int main()
         {
             for (int j=1;j<20;j++)
             {
-                map[j][rintang[i]]="  ";
+                map[j][obstacle[i]]="  ";
             }
         }
-        for (int i=0;i<3;i++) //make the obstacle move from right to left
+        for (int i=0;i<3;i++) 
         {
-            rintang[i]++;
+            obstacle[i]++;
         }
-        for (int i =0;i<3;i++) //make the obstacle back to right side if it touched left side
+        for (int i =0;i<3;i++) 
         {
             for (int j=1;j<20;j++)
             {
-                map[j][rintang[i]]="* ";
+                map[j][obstacle[i]]="* ";
             }
         }
-        for (int i=0;i<3;i++) //to make a hole at the obstacle
+        for (int i=0;i<3;i++) 
         {
-            map[rintangan[i]][rintang[i]]="  ";
-            map[rintangan[i]+1][rintang[i]]="  ";
-            map[rintangan[i]+2][rintang[i]]="  ";
-            map[rintangan[i]+3][rintang[i]]="  ";
-            map[rintangan[i]+4][rintang[i]]="  ";
+            map[obstacle[i]][obstacle[i]]="  ";
+            map[obstacle[i]+1][obstacle[i]]="  ";
+            map[obstacle[i]+2][obstacle[i]]="  ";
+            map[obstacle[i]+3][obstacle[i]]="  ";
+            map[obstacle[i]+4][obstacle[i]]="  ";
         }
         for (int i=0;i<3;i++)
         {
-            if (rintang[i]==1)
-                {rintang[i]=28;
-                rintangan[i]=(rand()-1)%12+2;
+            if (obstacle[i]==1)
+                {obstacle[i]=28;
+                obstacle[i]=(rand()-1)%12+2;
                 }
         }
         map[x][3]="  ";
@@ -80,7 +80,7 @@ int main()
             x=1;
         for (int i=0;i<3;i++)
         {
-            if (rintang[i]==3)
+            if (obstacle[i]==3)
                 if (map[x][3]=="  ")
                     score=score+1;
                 if (map[x][3]=="* ")
